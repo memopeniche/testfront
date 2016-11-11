@@ -1,0 +1,114 @@
+<div class="page-header">
+	<h3 class="page-title">{{topic.unitName}} / {{topic.name}}</h3>
+</div>
+
+<div class="portlet portlet-boxed">
+	<div class="portlet-header">
+		<h4 class='portlet-title'>Ejercicios</h4>
+	</div>
+  <div class="portlet-body">
+  	<div class="well">
+  		<p><b>¿Cómo se calculan tus puntos?</b></p>
+  		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin cursus felis enim, sed rutrum eros gravida at. Integer non nisi aliquam massa commodo pellentesque. Duis non malesuada felis. Phasellus rhoncus nisi porttitor aliquet commodo. Vivamus eget molestie lectus, at accumsan mi. Sed ac nibh a ipsum mollis feugiat a ut dolor. Quisque diam metus, bibendum ornare sapien at, pulvinar commodo mauris. Suspendisse eu dolor mauris. Aenean convallis, enim non blandit euismod, magna erat maximus arcu, at luctus nibh erat vitae libero. Nulla facilisi.</p>
+  	</div>
+
+  	<div class="row">
+  		<div class="col-sm-4">
+		    <div class="well text-center">
+		    <span class='badge badge-danger badge-primary pull-right'>2 pts</span>
+		    <br>
+		      <p><i class="fa fa-bicycle fa-5x text-muted"></i></p>
+		      <h5>Simples</h5>
+		      <div class="preview-ex well text-left">
+		      	<h6>Ejemplo</h6>
+			      <p marked="topic.examples[0]" mathjax></p>
+		      </div>
+		      <a href="" ng-click="getEx(0)" class="btn btn-primary btn-block">Intentar</a>
+		    </div>
+  		</div>
+  		<div class="col-sm-4">
+		    <div class="well text-center">
+		    <span class='badge badge-danger badge-primary pull-right'>3 pts</span>
+		    <br>
+		      <p><i class="fa fa-car fa-5x text-muted"></i></p>
+		      <h5>Intermedios</h5>
+		      <div class="preview-ex well text-left">
+		      	<h6>Ejemplo</h6>
+			      <p marked="topic.examples[1]" mathjax></p>
+		      </div>
+
+		      <a ng-click="getEx(1)" class="btn btn-primary btn-block">Intentar</a>
+                      <a ng-click="getEx2(1)" class="btn btn-primary btn-block">Voladores de Papantla</a>
+ 		      <a ng-click="getEx3(1)" class="btn btn-primary btn-block">Aparici&oacuten</a>
+		    </div>  		</div>
+  		<div class="col-sm-4">
+		    <div class="well text-center">
+		    <span class='badge badge-danger badge-primary pull-right'>5 pts</span>
+		    <br>
+		      <p><i class="fa fa-space-shuttle fa-5x text-muted"></i></p>
+		      <h5>Avanzados</h5>
+		     <div class="preview-ex well text-left">
+		      	<h6>Ejemplo</h6>
+			      <p marked="topic.examples[2]" mathjax></p>
+		      </div>
+		      <a ng-click="getEx(2)" class="btn btn-primary btn-block">Intentar</a>
+		    </div>
+  		</div>
+  	</div>
+  </div>
+</div>
+<div class="portlet portlet-boxed">
+	<div class="portlet-header">
+		<h4 class='portlet-title'>Lecturas</h4>
+	</div>
+  <div class="portlet-body">
+  <div class="row">
+  	<div class="col-xs-6">
+  		<h4>Internas</h4>
+	  	<div  class="panel-group accordion-panel" >
+		  <div ng-repeat="note in topic.notes.internal" class="panel panel-default" ng-class="{'is-open':note.show}">
+		    <div class="panel-heading" role="tab" >
+		      <h4 class="panel-title">
+		        <a class="accordion-toggle" ng-click="note.show = !note.show" href="">
+		        	<i class="fa" ng-class="{'fa-caret-down':note.show,'fa-caret-right':!note.show}"></i>
+		        	{{note.title}}
+		        </a>
+		      </h4>
+		    </div>
+		    <div class="panel-collapse" ng-show="note.show">
+		      <div class="panel-body">
+		      	<div marked="note.markdown" mathjax></div>
+		      	<div class="text-right">
+		      		<a href="#/notes/{{note.id}}" class="btn btn-secondary">Ver mas <i class="fa fa-arrow-right"></i></a>
+		      	</div>
+		      </div>
+		    </div>
+		  </div>
+		</div>  		
+  	</div>
+  	<div class="col-xs-6">
+  		<h4>Externas</h4>
+	  	<div  class="panel-group accordion-panel" >
+		  <div ng-repeat="note in topic.notes.external" class="panel panel-default" ng-class="{'is-open':note.show}">
+		    <div class="panel-heading" role="tab" >
+		      <h4 class="panel-title">
+		        <a class="accordion-toggle" ng-click="note.show = !note.show" href="">
+		        	<i class="fa" ng-class="{'fa-caret-down':note.show,'fa-caret-right':!note.show}"></i>
+		        	{{note.title}}
+		        </a>
+		      </h4>
+		    </div>
+		    <div class="panel-collapse" ng-show="note.show">
+		      <div class="panel-body">
+		      	<div marked="note.markdown" mathjax></div>
+		      	<div class="text-right">
+		      		<a href="#/notes/{{note.id}}" class="btn btn-secondary">Ver mas <i class="fa fa-arrow-right"></i></a>
+		      	</div>
+		      </div>
+		    </div>
+		  </div>
+		</div>  		
+  	</div>
+  </div>
+  </div>
+</div>

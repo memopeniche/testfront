@@ -1,0 +1,12 @@
+<div class="page-header">
+	<h3 class="page-title">{{note.title}}</h3>
+	<ol class="breadcrumb">
+	  <li><a href="#/dashboard">{{note.topic.unitName}}</a></li>
+	  <li><a href="#/topic/{{note.topic.id}}">{{note.topic.name}}</a></li>
+	  <li class="active"><a href="">Notas</a></li>
+	</ol>
+</div>
+
+<div class="portlet portlet-boxed">
+  <div class="portlet-body" marked="note.content" mathjax></div>
+</div>

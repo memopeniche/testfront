@@ -1,0 +1,83 @@
+<div id='dashboard' class="row" >
+  <div class="col-sm-7 col-md-8">
+  <h2>Unidades</h2>
+    <div ng-repeat="unit in units" class="portlet portlet-boxed">
+      <div class="portlet-header">
+        <h4 class="portlet-title">
+           {{unit.name}}
+        </h4>
+      </div> <!-- /.portlet-header -->
+      <div class="portlet-body topics-progress">
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="progress-stat" >
+              <div class="progress-stat-label"><h6>TEMA</h6></div>
+              <div class="progress-stat-value"><h6>PUNTOS</h6></div>
+            </div>            
+            <br>
+            <br>
+            <div class="progress-stat" ng-repeat="topic in unit.topics">
+              <div class="progress-stat-label"><a href="#/topic/{{topic.id}}">{{topic.name}}</a></div>
+              <div class="progress-stat-value">{{topic.score}}</div>
+              <div class="progress progress-striped progress-sm active">
+                <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="{{topic.score}}" aria-valuemin="0" aria-valuemax="100" style="width: {{topic.score}}%">
+                  <span class="sr-only"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-8 text-center">
+            <h4>Progreso en la unidad</h4>
+            <canvas id="radar" class="chart chart-radar" chart-data="unit.radarData" chart-labels="unit.radarLabels"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-5 col-md-4">
+    <div class="portlet portlet-boxed">
+      <div class="portlet-header">
+        <h4 class="portlet-title">
+          Ejercicios Recientes
+        </h4>
+      </div>
+      <div class="portlet-body">
+      <div class="btn-group btn-group-justified">
+          <div class="btn-group">
+            <button type='button' class="btn btn-secondary" ng-class="{'active':showNoSolve}" ng-click="showNoSolve = true;showHistory = false">Sin resolver</button>
+          </div>
+          <div class="btn-group">
+            <button type='button' class="btn btn-secondary" ng-class="{'active':showHistory}" ng-click="showNoSolve = false;showHistory = true">Historial</button>
+          </div>
+      </div>
+      <br>
+        <ul class="icons-list text-md" ng-show="showNoSolve">
+          <li ng-repeat="exercise in history" ng-show="!exercise.closed" style="padding: 0; cursor: pointer;">
+            <a href="#/exercises/{{exercise.id}}" >
+              <i class="icon-li fa fa-check-square text-secondary"></i>
+              <strong class="semibold">{{exercise.topicName}} | {{exercise.unitName}}</strong>
+              <p>
+                Completado: <span ng-show="exercise.closed">Sí</span><span ng-show="!exercise.closed">No</span>
+                <br>
+                Puntos: {{exercise.score}}
+              </p>
+            </a>
+          </li>
+        </ul>
+        <ul class="icons-list text-md" ng-show="showHistory">
+          <li ng-repeat="exercise in history" style="padding: 0; cursor: pointer;">
+            <a href="#/exercises/{{exercise.id}}">
+              <i class="icon-li fa fa-check-square text-secondary"></i>
+              <strong class="semibold">{{exercise.topicName}} | {{exercise.unitName}}</strong>
+              <p>
+                Completado: <span ng-show="exercise.closed">Sí</span><span ng-show="!exercise.closed">No</span>
+                <br>
+                Puntos: {{exercise.score}}
+              </p>
+            </a>
+          </li>
+        </ul>
+      </div> <!-- /.portlet-body -->
+    </div> <!-- /.portlet -->
+  </div> <!-- /.col -->
+</div> <!-- /.row -->

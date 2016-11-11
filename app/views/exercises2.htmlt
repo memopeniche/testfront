@@ -1,0 +1,165 @@
+<div class="page-header" layout="row" layout-align="space-between center">
+	<h3 class="page-title">{{ex.topic.unitName}} / <a href="#/topic/{{ex.topic.id}}">{{ex.topic.name}}</a>
+	</h3>
+	<h3>{{ex.topic.score}} pts</h3>
+</div>
+<hr>
+<div class="row">
+	<form ng-submit="verify(answer)" class='col-lg-8 col-lg-push-2'>
+		<div class="portlet portlet-boxed">
+			<div class="portlet-body">
+			<div class="text-right">
+		    	<span class='badge badge-dang '>{{ex.points}} pts</span><br>
+			</div>
+		    	<br>
+				<div class="well">
+					<div marked="ex.question" mathjax></div>
+				</div>
+				<div ng-if="ex.type == 1">
+					<div ng-repeat="c in ex.choices track by $index">
+					<label class="a" ng-class="['btn btn-default  btn-sm ', {'bg-success': showNext && $index == answer.radio || $index == correctAnwsers.radio}, {'bg-danger': showNext && failed && $index == answer.radio}]">
+						
+						<input name='answer' ng-model="answer.radio" type='radio' value='{{$index}}' class='pull-left' required>
+							{{c}}
+						</label>
+					
+					<style>
+label.a {
+position:fixed;
+top:30;
+left:30;
+font-size: 20px;
+}
+</style>   
+   
+<script type="text/javascript">
+window.stopAnimation = false;
+$(document).ready(function(){
+	animateDiv();
+	$("label.a").click(function(){ window.stopAnimation = true;});
+});
+
+function makeNewPosition(){
+    // Get viewport dimensions (remove the dimension of the div)
+    var h = $(window).height() - 50;
+    var w = $(window).width() - 50;
+    var nh = Math.floor(Math.random() * h);
+    var nw = Math.floor(Math.random() * w);
+    return [nh,nw];    
+}
+
+function animateDiv(){
+	if(window.stopAnimation){
+		return;		
+	}
+		
+	$('.a').each(function() {
+		var $a = $(this);
+		var newq = makeNewPosition();
+		var oldq = $a.offset();
+		var speed = calcSpeed([oldq.top, oldq.left], newq);
+		
+		$a.animate({ top: newq[0], left: newq[1] }, speed, function(){
+		  animateDiv();
+		});
+	});
+};
+
+function calcSpeed(prev, next) {
+    var x = Math.abs(prev[1] - next[1]);
+    var y = Math.abs(prev[0] - next[0]);
+    var greatest = x > y ? x : y;
+    var speedModifier = 0.1;
+    var speed = Math.ceil(greatest/speedModifier);
+
+    return speed;
+}
+</script>
+						<br>
+					</div>
+					<button type='submit' class='btn btn-success center-block' ng-show="showVerify">REVISAR</button>
+				</div>
+				<div ng-if="ex.type == 2">
+					<div ng-repeat="c in ex.choices track by $index">
+            <!--
+              ng-class="['btn btn-sm btn-block btn-default text-left', {'bg-success': showNext && correctAnwsers[$index]}, {'bg-danger': showNext && failed && !correctAnwsers[$index] }]"
+            -->
+						<label
+              ng-class="['btn btn-sm btn-block btn-default text-left',
+                {
+
+                  'bg-danger': showNext && failed && ((correctAnwsers[$index] && !answer[$index]) || !correctAnwsers[$index] && answer[$index] )
+
+                }
+              ]"
+              >
+							<input id="answer_{{$index}}" ng-model="answer[$index]" type='checkbox' value='{{$index}}' class='pull-left' ng-required="answer.algo.lol" ng-change="checkOne(answer)">
+							{{c}}
+						</label>
+						<br>
+					</div>
+					<button type='submit' ng-disabled="markAnswer" class='btn btn-success center-block' ng-show="showVerify">REVISAR</button>
+
+        </div>
+				<div ng-if="ex.type == 4 || ex.type == 3" class="row">
+					<div class="col-xs-9 text-center">
+						<ul layout="column" style="list-style: none; padding: 0;">
+							<li ng-repeat="step in ex.steps" ng-class="{'bg-success': step.rightStep == true, 'bg-danger': step.rightStep == false}"  class="well" style="margin: 1em 0; padding: 0;" mathjax>{{step.latex}}</li>
+						</ul>
+						<div class="btn-group">
+							<button type='button' style="width:auto" class="btn btn-default buttons-latex" mathjax ng-click="buttonLatex('^')">$$x^{y}$$</button>
+							<button type='button' style="width:auto;font-size:12px" class="btn btn-default buttons-latex" mathjax ng-click="buttonLatex('\\frac')">$$\frac{x}{y}$$</button>
+							<button type='button' style="width:auto" class="btn btn-default buttons-latex" mathjax ng-click="buttonLatex('\\sqrt')">$$\sqrt{x}$$</button>
+							<button type='button' style="width:auto" class="btn btn-default buttons-latex" mathjax ng-click="buttonLatex('\\times')">$${x}\times{y}$$</button>
+				        </div>
+						<div ng-show="!ex.closed">
+				        	<br>
+							<div layout="row" layout-align="start start">
+								<p style="margin-right: 10px;" ng-show="ex.type == 3">Escribe la respuesta:</p>
+								<p style="margin-right: 10px;" ng-show="ex.type == 4">Escribe el paso siguiente:</p>
+								<!-- <mathquill model="$parent.latex" default-value="ex.steps.length==0?ex.startLatex:ex.steps[ex.steps.length-1].latex"></mathquill> -->
+								<mathquill model="$parent.latex" ></mathquill>
+			      				<input type="hidden" ng-model="stepLx" value="{{latex}}">
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-3">
+						<div class='text-center' ng-show="ex.type == 4">
+				          <p>Resolver como:</p>
+				          <div class="btn-group-vertical">
+				            <button type='button' ng-click="setPreference(true)" class='btn btn-primary' ng-class="{'active': userPreferences.freeEx}">Entrada libre</button>
+				            <button type='button' ng-click="setPreference(false)" class='btn btn-primary' ng-class="{'active': !userPreferences.freeEx}">Paso a paso</button>          	
+				          </div>
+			         	</div>				
+					</div>
+				</div>
+		      	<br>
+				<button type='submit' class='btn btn-success center-block' ng-show="ex.type ==3 && showVerify">REVISAR</button>
+		      	<div layout="row" ng-show="ex.type == 4 && !userPreferences.freeEx">
+					<button type='submit' class='btn btn-success center-block' ng-show="showVerify">Verificar paso</button>
+					<a ng-click="verify(answer, true);" class='btn btn-success center-block' ng-show="showVerify">Evaluar resultado</a>
+		      	</div>
+				<a ng-click="verify(answer, true);" class='btn btn-success center-block' ng-show="ex.type == 4 && userPreferences.freeEx && showVerify">Evaluar resultado</a>
+		        <div layout="row" layout-align="center center" ng-show="loading">
+		          <md-progress-circular md-mode="indeterminate" md-diameter="120px"></md-progress-circular>
+		        </div>
+		        <div class="success">
+					<h5 class="text-center text-success" ng-show="success">Has respondido correctamente</h5>
+					<h5 class="text-center text-error" ng-show="failed && !errorCode">La respuesta es incorrecta</h5>
+					<h6 class="text-center text-error" ng-show="failed && !errorCode">La respuesta correcta es:
+			      		<span>{{ex.choices[0]}}</span>
+			      	</h6>
+					<h5 class="text-center text-error" ng-show="showError">{{errors[errorCode]}}</h5>
+					<div class="row">
+						<div class="col-xs-6">
+			          		<a ng-show="showNext" href="#/topic/{{ex.topic.id}}" ng-class="['center-block', 'btn', 'btn-large', {'btn-success': success}, {'btn-danger': failed}, {'btn-info': otherRes}]">Regresar</a>
+						</div>
+						<div class="col-xs-6">
+			          		<a ng-show="showNext" ng-click="nextExercise2()" ng-class="['center-block', 'btn', 'btn-large', {'btn-success': success}, {'btn-danger': failed}, {'btn-info': otherRes}]">Continuar</a>
+						</div>
+					</div>
+		        </div>
+			</div>
+		</div>
+	</form>
+</div>

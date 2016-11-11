@@ -1,0 +1,12 @@
+instalar:
+  nodejs
+  npm
+
+npm :
+
+  npm install -g grunt-cli bower yo generator-karma generator-angular
+
+npm install
+bower install
+
+grunt serve

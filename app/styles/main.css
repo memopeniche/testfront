@@ -1,0 +1,33 @@
+@import url("mvpready-admin.css");
+@import url("mathquill.css");
+
+html, body{height: auto;}
+.topics-progress .progress-stat{margin-bottom: 0}
+#dashboard .progress-stat-label{width: 80%}
+#dashboard .progress-stat-value{width: 20%}
+#admin table th,#admin table td{text-align: center;}
+#admin table .topicName{text-align: left;}
+
+.show-error{font-size: 20px;}
+
+.buttons-latex {
+  border: 1px solid black;
+  height: 45px;
+  width: 45px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.buttons-latex:hover {
+  background-color: #e3e3e3;
+}
+
+.MJXc-display{padding: 4px !important}
+.mjx-chtml.MJXc-display {
+  margin: 0;
+}
+
+.preview-ex {
+  padding: 9px;
+  overflow-x: auto;
+}

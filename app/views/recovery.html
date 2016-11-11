@@ -1,0 +1,38 @@
+<div class="account-wrapper">
+    <div class="account-body">
+
+      <h2>Restablecer contraseña</h2>
+
+      <form class="form account-form" ng-submit="submit(form)" ng-show="!success && !loading">
+
+        <div class="form-group">
+          <label for="forgot-email" class="placeholder-hidden">Correo Electrónico</label>
+          <input ng-model="form.email" type="email" class="form-control" id="forgot-email" placeholder="Email" tabindex="1" required>
+
+          <label for="forgot-email" class="placeholder-hidden">Contraseña</label>
+          <input ng-model="form.password" type="password" class="form-control" id="forgot-email" placeholder="Contraseña" tabindex="1" required>
+
+          <label for="forgot-email" class="placeholder-hidden">Confirmar contraseña</label>
+          <input ng-model="repeatPassword" type="password" class="form-control" id="forgot-email" placeholder="Repite tu contraseña" tabindex="1" required>
+        </div> <!-- /.form-group -->
+
+        <div class="form-group">
+          <button type="submit" class="btn btn-secondary btn-block btn-lg" tabindex="2">
+            Actualizar contraseña &nbsp; <i class="fa fa-refresh"></i>
+          </button>
+        </div> <!-- /.form-group -->
+
+        <div class="form-group">
+          <a href="#/login"><i class="fa fa-angle-double-left"></i> &nbsp;Regresar al login</a>
+        </div> <!-- /.form-group -->
+      </form>
+      <div layout="row" layout-align="center center" ng-show="loading && !success && !failed">
+        <md-progress-circular md-mode="indeterminate" md-diameter="100px"></md-progress-circular>
+      </div>
+      <p class="show-error" ng-show="success">Contraseña actualizada</p>
+      <p class="show-error" ng-show="failed">Error al actualizar la contraseña</p>
+      <p class="show-error" ng-show="showError">{{showError}}</p>
+
+    </div> <!-- /.account-body -->
+
+</div> <!-- /.account-wrapper -->

@@ -1,0 +1,49 @@
+<div class="portlet portlet-boxed">
+  <div class="portlet-body">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="profile-avatar">
+                <img src="images/avatar-default.jpg" class="profile-avatar-img img-responsive thumbnail" alt="Profile Image">
+              </div> <!-- /.profile-avatar -->
+            </div>
+            <div class="col-md-6">
+              <br class="visible-xs">
+              <h3>{{profile.fullName}}</h3>
+              <!-- <h6 class="text-muted"></h6> -->
+              <hr>
+              <ul class="icons-list">
+                <li><i class="icon-li fa fa-user"></i> {{profile.username}}</li>
+                <li><i class="icon-li fa fa-envelope"></i> {{profile.email}}</li>
+                <!-- <li><i class="icon-li fa fa-map-marker"></i> Las Vegas, NV</li> -->
+              </ul>
+              <br>
+              </div> <!-- /.col -->
+              <div class="col-md-3">
+                <div class="heading-block">
+                  <h5>Datos escolares</h5>
+                </div>
+                <form ng-submit="updateCareer(form)">
+                    <label>Carrera</label>
+                    <select ng-model='form.idCareer' class="form-control" >
+                      <option value=''>Seleccionar</option>
+                      <option ng-repeat="c in careers" value='{{c.id}}' ng-selected="c.id==profile.idCareer">{{c.name}}</option>
+                    </select>
+                    <br>
+                    <button type='submit' class="btn-primary btn btn-sm btn-block">Guardar</button>
+                </form>
+              </div>
+<!--               <div class="col-md-3">
+                <div class="heading-block">
+                  <h5>Puntaje por curso</h5>
+                </div>
+                <div class="list-group">
+                  <a  ng-repeat="curse in profile.curses" href="" class="list-group-item">
+                    <h3 class="pull-right"><i class="fa fa-dot-circle-o text-primary"></i></h3>
+                    <h4 class="list-group-item-heading">{{curse.points}}</h4>
+                    <p class="list-group-item-text">{{curse.name}}</p>
+                  </a>
+                </div>
+              </div> -->
+            </div>
+  </div>
+</div>

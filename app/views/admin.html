@@ -1,0 +1,91 @@
+<div id='admin' class="row" >
+	<div class="col-sm-7 col-md-8">
+		<div ng-repeat="unit in units" class="portlet portlet-boxed">
+		  <div class="portlet-header">
+		    <h4 class="portlet-title">
+		       {{unit.name}}
+		    </h4>
+		  </div> <!-- /.portlet-header -->
+		  <div class="portlet-body topics-progress">
+		  	<table class="table keyvalue-table">
+		  		<thead>
+			  		<tr>
+			  			<th rowspan="2">Tema</th>
+			  			<th colspan="2">Simples</th>
+			  			<th colspan="2">Intermedios</th>
+			  			<th colspan="2">Avanzados</th>
+			  			<th rowspan="2">Total</th>
+			  			<th rowspan="2">Cargar</th>
+			  		</tr>
+		  			<tr>
+		  				<th>O.M.</th>
+		  				<th>P.A.P</th>
+		  				<th>O.M.</th>
+		  				<th>P.A.P</th>
+		  				<th>O.M.</th>
+		  				<th>P.A.P</th>
+		  			</tr>
+		  		</thead>
+                <tbody>
+                  <tr ng-repeat="topic in unit.topics">
+                    <td class="topicName kv-key"> {{topic.name}}</td>
+                    <td class="kv-value">{{topic.exercises[0].options}}</td>
+                    <td class="kv-value">{{topic.exercises[0].stepByStep}}</td>
+                    <td class="kv-value">{{topic.exercises[1].options}}</td>
+                    <td class="kv-value">{{topic.exercises[1].stepByStep}}</td>
+                    <td class="kv-value">{{topic.exercises[2].options}}</td>
+                    <td class="kv-value">{{topic.exercises[2].stepByStep}}</td>
+                    <td class="kv-value">{{topic.totalExs}}</td>
+                    <td class="kv-value">
+                    	<button type='button' ng-click="topicClick(topic.id)" class="btn btn-success"><i class="fa fa-plus"></i></button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+		  </div>
+		</div>
+	</div>
+	  <div class="col-sm-5 col-md-4">
+    <div class="portlet portlet-boxed">
+      <div class="portlet-header">
+        <h4 class="portlet-title">
+          Cargas recientes
+        </h4>
+      </div>
+      <div class="portlet-body">
+        <ul class="icons-list text-md" >
+          <li ng-repeat="load in loads" style="padding: 0; cursor: pointer;">
+            <a href="" >
+              <i class="icon-li fa fa-check-square text-secondary"></i>
+              <strong class="semibold">{{load.unitName}} > {{load.topicName}}</strong>
+              <p>Ejercicios cargados: {{load.exs}}</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div> 
+  </div> 
+</div>
+<div id='loadFileModal' class="modal fade">
+  <div class="modal-dialog ">
+    <div class="modal-content">
+      <div class="modal-header" style="padding:5px 10px">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title">Cargar archivo de ejercicios</h4>
+      </div>
+      <div class="modal-body">
+      	<form ng-submit="loadFile(form)" >
+      		<div class="form-group">
+      			<label>Archivo</label>
+      			<input type="file" file-model='form.file' accept=".json">
+      		</div>
+      		<div class="form-group">
+      			<label>Notas</label>
+      			<textarea class='form-control' ng-model="form.notes"></textarea>
+      		</div>
+      		<button type='submit' class="btn btn-sm btn-primary">Enviar</button>
+      	</form>
+      </div>      
+    </div>
+  </div>
+</div>

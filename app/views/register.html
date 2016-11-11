@@ -1,0 +1,74 @@
+<div class="account-wrapper">
+
+  <div class="account-body">
+
+    <h3 ng-show="!msg">Inicia usando tus datos de la universidad.</h3>
+
+    <!-- <h5>Sign up in 30 seconds. No credit card required.</h5> -->
+
+    <form class="form account-form" ng-submit="doRegister(form, confirmPassword)" ng-show="!msg">
+
+      <div class="form-group">
+        <label for="signup-email" class="placeholder-hidden">Nombre</label>
+        <input type="text" class="form-control" id="signup-email" ng-model="form.first_name" placeholder="Nombre" tabindex="1" required>
+      </div> <!-- /.form-group -->
+
+      <div class="form-group">
+        <label for="signup-fullname" class="placeholder-hidden" >Apellido</label>
+        <input type="text" class="form-control" id="signup-fullname" ng-model="form.last_name" placeholder="Apellido" tabindex="2" required>
+      </div> <!-- /.form-group -->
+
+      <div class="form-group">
+        <label for="signup-username" class="placeholder-hidden" >Correo Electrónico</label>
+        <input type="email" class="form-control" id="signup-username" ng-model="form.email" placeholder="Correo Electrónico" tabindex="3" required>
+      </div> <!-- /.form-group -->
+
+      <div class="form-group">
+        <label for="login-password" class="placeholder-hidden">Nombre de usuario</label>
+        <input type="text" class="form-control" id="login-password" ng-model="form.username" placeholder="Nombre de usuario" tabindex="4" required>
+      </div> <!-- /.form-group -->
+
+      <div class="form-group">
+        <label for="login-password" class="placeholder-hidden">Contraseña</label>
+        <input type="password" class="form-control" id="login-password" ng-model="form.password" placeholder="Contraseña" tabindex="4" required>
+      </div> <!-- /.form-group -->
+
+      <div class="form-group">
+        <label for="login-password" class="placeholder-hidden">Confirmar Contraseña</label>
+        <label for="login-password" class="btn-danger" ng-show="passwordError">Contraseñas distintas</label>
+        <input type="password" class="form-control" id="login-password" ng-model="confirmPassword" placeholder="Confirmar contraseña" tabindex="4" required>
+      </div> <!-- /.form-group -->
+
+      <!-- <div class="form-group"> -->
+        <!-- <label class="checkbox-inline"> -->
+        <!-- <input type="checkbox" class="" value="" tabindex="5"> I agree to the <a href="javascript:;" target="_blank">Terms of Service</a> &amp; <a href="javascript:;" target="_blank">Privacy Policy</a> -->
+          <!-- </label> -->
+        <!-- </div> -->
+
+      <div class="form-group">
+        <button type="submit" class="btn btn-secondary btn-block btn-lg" tabindex="6" ng-show="!loading && !msg">
+          Registrarme &nbsp; <i class="fa fa-play-circle"></i>
+        </button>
+        <div layout="row" layout-align="center center" ng-show="loading && !msg">
+          <md-progress-circular md-mode="indeterminate" md-diameter="100px"></md-progress-circular>
+        </div>
+
+        <ul ng-show="errors">
+          <li class="danger" ng-repeat="(key,val) in errors">{{key}}: {{val}}</li>
+        </ul>
+      </div> <!-- /.form-group -->
+
+    </form>
+
+    <p class="show-error" ng-show="msg">Hemos enviado un correo electrónico para confirmar la cuenta.</p>
+
+  </div> <!-- /.account-body -->
+
+  <div class="account-footer">
+    <p>
+      ¿Ya tienes una cuenta? &nbsp;
+      <a href="#/login" class="">Accede a tu cuenta!</a>
+    </p>
+  </div> <!-- /.account-footer -->
+
+</div> <!-- /.account-wrapper -->

@@ -1,0 +1,146 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/angular-chart.js/dist/angular-chart.css" />
+    <link rel="stylesheet" href="bower_components/ang-accordion/css/ang-accordion.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,800,800italic">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald:400,300,700">
+  </head>
+  <body ng-app="academiaApp" ng-cloak>
+    <!--[if lte IE 8]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <!-- Add your site or application content here -->
+<div id="wrapper">
+
+  <div class="login-wrapper" ng-cloak  ng-controller="LoginCtrl">
+    <header class="navbar" role="banner">
+      <div class="container">
+        <div class="navbar-header">
+          <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <i class="fa fa-bars"></i>
+          </button>
+          <a href='#/' class="navbar-text">
+            Academia de Matemáticas
+          </a>
+        </div>
+        <nav class="collapse navbar-collapse" role="navigation">
+          <ul class="nav navbar-nav navbar-left">
+            <li><a href="#/dashboard">Escritorio Propedeutico</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right" ng-cloak ng-init="">
+            <li><a href='#/profile'>Perfil</a></li>
+            <li ng-show="!isLogIn"><a href='#/login'>Ingresar</a></li>
+            <li ng-show="isLogIn"><a href='' ng-click="logOut()">Salir</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <div class="mainnav" ng-show="false" ng-cloak>
+      <div class="container">
+        <div class="mainnav-toggle" data-toggle='collapse' data-target='.mainnav-collapse'>
+          <span class='sr-only'>Toggle navigation</span>
+          <i class='fa fa-bars'></i>
+        </div>
+        <nav class="collapse mainnav-collapse">
+          <ul class='mainnav-menu'>
+            <li class=''>
+              <a href="#/dashboard">
+                Dashboard
+                <i class=''></i>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <div class="content">
+    <div class="container">
+      <div ng-view=""></div>
+    </div>
+  </div>
+</div>
+<!-- alert modal -->
+<div id='alertModal' class="modal fade">
+  <div class="modal-dialog ">
+    <div class="modal-content">
+      <div class="modal-header" style="padding:5px 10px">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      </div>
+      <div class="modal-body">Alerta</div>      
+      <div class="modal-footer text-right">
+        <button type='button' class="btn btn-default btn-sm" data-dismiss='modal'>Cerrar</button>
+      </div>      
+    </div>
+  </div>
+</div>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+  <!-- build:js(.) scripts/vendor.js -->
+  <!-- bower:js -->
+  <script src="bower_components/es5-shim/es5-shim.js"></script>
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.js"></script>
+  <script src="bower_components/angular-aria/angular-aria.js"></script>
+  <script src="bower_components/angular-messages/angular-messages.js"></script>
+  <script src="bower_components/angular-material/angular-material.js"></script>
+  <script src="bower_components/angular-resource/angular-resource.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="bower_components/Chart.js/Chart.js"></script>
+  <script src="bower_components/angular-chart.js/dist/angular-chart.js"></script>
+  <script src="bower_components/marked/lib/marked.js"></script>
+  <script src="bower_components/angular-marked/dist/angular-marked.js"></script>
+  <script src="bower_components/angular-accordion/angular-accordion.js"></script>
+  <script src="bower_components/ang-accordion/js/ang-accordion.js"></script>
+  <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+  <!-- endbower -->
+  <!-- endbuild -->
+
+  <!-- build:js({.tmp,app}) scripts/scripts.js -->
+  <script src="scripts/js/mvpready-core.js"></script>
+  <script src="scripts/js/mvpready-helpers.js"></script>
+  <script src="scripts/js/mvpready-admin.js"></script>
+  <script src="scripts/js/mathquill.js"></script>
+  <script src="scripts/app.js"></script>
+  <script src="scripts/controllers/main.js"></script>
+  <script src="scripts/controllers/about.js"></script>
+  <script src="scripts/controllers/login.js"></script>
+  <script src="scripts/controllers/register.js"></script>
+  <script src="scripts/controllers/recover-password.js"></script>
+  <script src="scripts/controllers/dashboard.js"></script>
+  <script src="scripts/services/api.js"></script>
+  <script src="scripts/services/user.js"></script>
+  <script src="scripts/controllers/email_verification.js"></script>
+  <script src="scripts/controllers/topic.js"></script>
+  <script src="scripts/controllers/exercises.js"></script>
+  <script src="scripts/directives/mathjax.js"></script>
+  <script src="scripts/directives/mathquill.js"></script>
+  <script src="scripts/directives/file-model.js"></script>
+  <script src="scripts/controllers/notes.js"></script>
+  <script src="scripts/controllers/profile.js"></script>
+  <script src="scripts/controllers/admin.js"></script>
+  <script src="scripts/controllers/recovery.js"></script>
+  <!-- endbuild -->
+</body>
+</html>
